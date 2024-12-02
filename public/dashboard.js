@@ -1,15 +1,13 @@
 window.onload = () => {
 
-    // Get the current user's token and decode it
     let token = sessionStorage.getItem('accessToken');
     if (!token) {
-        window.location.href = 'login.html';  // Redirect to login page if no token
+        window.location.href = 'login.html';
         return;
     }
     let decodedToken = jwt_decode(token);
-    const privilege = decodedToken.privilege;  // Assuming 'privilege' is part of the token
-    const address = decodedToken.address; // Assuming address is in the token
-    // Decode token to get user's privilege
+    const privilege = decodedToken.privilege;
+    const address = decodedToken.address;
     try {
         
 
@@ -31,7 +29,7 @@ window.onload = () => {
         }
     } catch (error) {
         alert(error);
-        window.location.href = 'login.html'; // Redirect if token decoding fails
+        window.location.href = 'login.html';
     }
 
     // Get Balance button
@@ -137,7 +135,6 @@ window.onload = () => {
             });
             const loanRequest = await response.json();
     
-            // Check if there is a valid loan request
             if (loanRequest.status === true && loanRequest.response) {
                 document.getElementById('borrower-address').textContent = loanRequest.response.address;
                 document.getElementById('loan-amount').textContent = `${loanRequest.response.loanAmount} ETH`;
@@ -153,12 +150,10 @@ window.onload = () => {
                     await handleLoanAction('reject', loanRequest.response.address);
                 };
             } else {
-                // Hide the card if no loan request is found
                 document.getElementById('loan-request-card').style.display = 'none';
             }
         } catch (error) {
             console.error("Error fetching loan request:", error);
-            // Ensure card is hidden on error
             document.getElementById('loan-request-card').style.display = 'none';
         }
     }

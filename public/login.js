@@ -1,7 +1,6 @@
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
 
-    // Get values from the form
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
@@ -11,7 +10,6 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
         return;
     }
 
-    // Prepare data to send
     const loginData = {
         username,
         password
@@ -26,23 +24,21 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
             body: JSON.stringify(loginData),
         });
 
-        const data = await response.json(); // Parse JSON response
+        const data = await response.json();
 
-        console.log('Response:', data);  // Log the response for debugging
+        console.log('Response:', data);
         
         if (response.ok) {
-            // On successful login, save the tokens and redirect
             sessionStorage.setItem('accessToken', data.accessToken);
             sessionStorage.setItem('refreshToken', data.refreshToken);
 
             alert("Login successful!");
-            window.location.href = '/dashboard.html'; // Redirect to the dashboard or home page
+            window.location.href = '/dashboard.html';
         } else {
-            // Show error message from the backend
             alert(data.message || "Login failed. Please try again.");
         }
     } catch (error) {
-        console.error("Error during login:", error);  // Log any frontend error
+        console.error("Error during login:", error);
         alert("Failed to log in, please try again.");
     }
 });

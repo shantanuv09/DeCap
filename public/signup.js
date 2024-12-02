@@ -1,7 +1,6 @@
 document.getElementById("signupForm").addEventListener("submit", async (e) => {
-    e.preventDefault(); // Prevent the form from submitting normally
+    e.preventDefault();
 
-    // Get values from the form
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
@@ -18,7 +17,6 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
         return;
     }
 
-    // Prepare data to send
     const userData = {
         username,
         password,
@@ -39,7 +37,7 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
 
         if (response.ok) {
             alert("User created successfully!");
-            window.location.href = '/login.html'; // Redirect to login page after successful sign up
+            window.location.href = '/login.html';
         } else {
             alert(data.message || "Error occurred while creating the user.");
         }

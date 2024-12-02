@@ -1,5 +1,3 @@
-const { status } = require("express/lib/response");
-
 class DecentralizedBankContract {
   constructor() {
     require("dotenv").config();
@@ -43,7 +41,6 @@ class DecentralizedBankContract {
   async getBalance(accountAddress) {
     try {
       return this.web3.eth.getBalance(accountAddress).then((balance) => {
-        // return `Balance for ${accountAddress}: ${this.web3.utils.fromWei(balance, "ether")} ETH`;
         return {
           status: true,
           accountAddress,
@@ -53,7 +50,6 @@ class DecentralizedBankContract {
         
       });
     } catch (error) {
-      // return `Error in retrieving your balance: ${error}`;
       return {
         status: false,
         fullMessage: `Error in retrieving your balance: ${error}`,

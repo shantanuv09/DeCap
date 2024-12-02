@@ -1,16 +1,3 @@
-const {
-  executeContractMethod,
-  sendTransaction,
-  initInvestor,
-  getBalance,
-  initBorrower,
-  createDeposit,
-  withdrawDeposit,
-  requestLoan,
-  approveLoan,
-  doLoanRepayment,
-  rejectLoan,
-} = require("./utils.js");
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose');
@@ -192,7 +179,7 @@ app.get('/dashboard.html', (req, res) => {
     res.setHeader('Pragma', 'no-cache');
     res.setHeader('Expires', '0');
     res.setHeader('Surrogate-Control', 'no-store');
-    res.sendFile(path.join("C://Users//shant//OneDrive//Desktop//Project//public//dashboard.html", 'public', 'dashboard.html')); // Adjust the path to your public directory
+    res.sendFile(path.join("<path-to-dashboard.html>", 'public', 'dashboard.html'));
 });
 
 function generateAccessToken(user, privilege) {
@@ -218,9 +205,7 @@ function authenticateToken(req, res, next) {
 
   
 app.get("/user/:user/balance", authenticateToken, async (req, res) => {
-    // http://localhost:3000/investor/balance/0x99af3EA2b547Be1b85cB2E47de1185F20Dd7B077
     const user = req.params.user;
-    // const investor1 = `0x99af3EA2b547Be1b85cB2E47de1185F20Dd7B077`;
     const decoded_token = jwtDecode(req.headers['authorization'].split(' ')[1].toString())
     
     try {
