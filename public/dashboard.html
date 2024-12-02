@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            background-image: url('/public/images/BGimg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-light">
+        
+    <div class="container py-5">
+        <a href="dashboard.html"  style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
+            <img src="/public/images/logo.png" class="center" alt="DeCap Logo" style="height: 80px; width: auto;">
+        </a>
+        <h1 class="text-center mb-4">Dashboard</h1>
+
+        <!-- Balance Section -->
+        <div id="balance-section" class="card shadow mb-4 glass" style="display:none;">
+            <div class="card-body text-center">
+                <button id="getBalanceBtn" class="btn btn-primary">
+                    <i class="fas fa-wallet"></i> Get Balance
+                </button>
+                <p id="balanceText" class="mt-3 text-success"></p>
+            </div>
+        </div>
+
+        <!-- Deposit Section -->
+        <div id="deposit-section" class="card shadow mb-4 glass" style="display:none;">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-money-bill-wave"></i> Deposit</h5>
+                <div class="input-group">
+                    <input type="number" id="depositAmount" class="form-control" placeholder="Enter deposit amount">
+                    <button id="depositBtn" class="btn btn-success btn-small-width">Deposit</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Withdraw Section -->
+        <div id="withdraw-section" class="card shadow mb-4 glass" style="display:none;">
+            <div class="card-body text-center">
+                <button id="withdrawBtn" class="btn btn-warning">
+                    <i class="fas fa-hand-holding-usd"></i> Withdraw Deposit
+                </button>
+            </div>
+        </div>
+
+        <!-- Loan Section -->
+        <div id="loan-section" class="card shadow mb-4 glass" style="display:none;">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-handshake"></i> Loan Request</h5>
+                <div class="input-group">
+                    <input type="number" id="loanAmount" class="form-control" placeholder="Enter loan amount">
+                    <button id="requestLoanBtn" class="btn btn-info btn-small-width">Request Loan</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="loan-request-card" class="card shadow mb-4 glass" style="display:none;">
+            <div class="card-body">
+                <h5 class="card-title">Loan Request</h5>
+                <p><strong>Address:</strong> <span id="borrower-address"></span></p>
+                <p><strong>Amount:</strong> <span id="loan-amount"></span></p>
+                <button id="approveLoanBtn" class="btn btn-success">Approve</button>
+                <button id="rejectLoanBtn" class="btn btn-danger">Reject</button>
+            </div>
+        </div>
+
+        <!-- Pay Loan Section -->
+        <div id="pay-loan-section" class="card shadow mb-4 glass" style="display:none;">
+            <div class="card-body text-center">
+                <button id="payLoanBtn" class="btn btn-success">
+                    <i class="fas fa-money-check"></i> Pay Loan
+                </button>
+            </div>
+        </div>
+
+        <!-- Initialize Investor Section -->
+        <div id="initialize-investor-section" class="card shadow mb-4 glass" style="display:none;">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-user-tie"></i> Initialize Investor</h5>
+                <div class="input-group">
+                    <input type="text" id="investorAddress" class="form-control" placeholder="Enter investor address">
+                    <button id="initializeInvestorBtn" class="btn btn-secondary btn-small-width">Initialize</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Initialize Borrower Section -->
+        <div id="initialize-borrower-section" class="card shadow mb-4 glass" style="display:none;">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-user"></i> Initialize Borrower</h5>
+                <div class="input-group">
+                    <input type="text" id="borrowerAddress" class="form-control" placeholder="Enter borrower address">
+                    <button id="initializeBorrowerBtn" class="btn btn-secondary btn-small-width">Initialize</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logout Button -->
+        <div class="text-center mt-4">
+            <button id="logoutBtn" class="btn btn-danger">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+        <div class="text-center mt-4">
+            <button id="refreshBtn" class="btn btn-success">
+                Refresh Token
+            </button>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="dashboard.js"></script>
+    <script>
+        window.addEventListener("pageshow", (event) => {
+            if (event.persisted || window.performance && window.performance.navigation.type === 2) {
+                window.location.reload();
+            }
+        });
+    </script>
+</body>
+</html>
