@@ -9,3 +9,18 @@ DeCap is a blockchain-powered decentralized platform for fixed deposits and loan
 - Secure authentication using JWT.
 - Real-time financial operations with blockchain transparency.
 - User-friendly interface with responsive design.
+
+## Architecture
+<img src="assets/Blockchain_arch.drawio.png" alt="DeCap Logo" width="1000">
+
+## API Interactions
+<img src="assets/API_endpoints.drawio.png" alt="DeCap Logo" width="1000">
+
+## MongoDB Auth Setup
+<img src="assets/MongoDB_Schema.drawio.png" alt="DeCap Logo" width="600">
+
+## JWT Auth Scenario
+<img src="assets/JWT_tokens.drawio.png" alt="DeCap Logo" width="600">
+
+
+
