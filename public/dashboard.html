@@ -14,7 +14,7 @@
 
     <style>
         body {
-            background-image: url('/public/images/BGimg.jpg');
+            background-image: url('images/BGimg.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -28,7 +28,7 @@
         
     <div class="container py-5">
         <a href="dashboard.html"  style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
-            <img src="/public/images/logo.png" class="center" alt="DeCap Logo" style="height: 80px; width: auto;">
+            <img src="images/logo.png" class="center" alt="DeCap Logo" style="height: 80px; width: auto;">
         </a>
         <h1 class="text-center mb-4">Dashboard</h1>
 
@@ -92,6 +92,17 @@
             </div>
         </div>
 
+        <div id="sidebar" class="sidebar" style="display:none">
+            <button id="closeSidebar" class="btn btn-danger" style="position: absolute; top: 10px; right: 10px;">&times;</button>
+            <h4>Users</h4>
+            <div id="userListContainer">
+                <ul id="userList">
+                    <!-- User list will be dynamically inserted here -->
+                </ul>
+            </div>
+        </div>
+
+
         <!-- Initialize Investor Section -->
         <div id="initialize-investor-section" class="card shadow mb-4 glass" style="display:none;">
             <div class="card-body">
@@ -114,17 +125,26 @@
             </div>
         </div>
 
+        <!-- Show Users Button -->
+        <div class="text-center mt-4">
+            <button id="openSidebarBtn" class="btn btn-primary" style="display: none;">Show Users</button>
+        </div>
+
+        <!-- Refresh Token Button -->
+        <div class="text-center mt-4">
+            <button id="refreshBtn" class="btn btn-success">
+                Refresh Token
+            </button>
+        </div>
+
         <!-- Logout Button -->
         <div class="text-center mt-4">
             <button id="logoutBtn" class="btn btn-danger">
                 <i class="fas fa-sign-out-alt"></i> Logout
             </button>
         </div>
-        <div class="text-center mt-4">
-            <button id="refreshBtn" class="btn btn-success">
-                Refresh Token
-            </button>
-        </div>
+        
+        
     </div>
 
     <!-- Bootstrap JS -->

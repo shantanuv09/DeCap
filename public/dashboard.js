@@ -9,7 +9,6 @@ window.onload = () => {
     const privilege = decodedToken.privilege;
     const address = decodedToken.address;
     try {
-        
 
         // Show/Hide sections based on privilege
         if (privilege === 'investor') {
@@ -26,6 +25,8 @@ window.onload = () => {
             document.getElementById('loan-request-card').style.display = 'block';
             document.getElementById('initialize-investor-section').style.display = 'block';
             document.getElementById('initialize-borrower-section').style.display = 'block';
+            document.getElementById('openSidebarBtn').style.display = 'block';
+            document.getElementById('sidebar').style.display = 'block';
         }
     } catch (error) {
         alert(error);
@@ -123,6 +124,40 @@ window.onload = () => {
         } catch (error) {
             alert('Error requesting loan');
         }
+    });
+
+    async function loadUsers() {
+        const userListContainer = document.getElementById('userList');
+        try {
+            const response = await fetch('http://localhost:3000/getUsers', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            const data = await response.json();
+            const users = Array.isArray(data) ? data : data.users || [];
+    
+            userListContainer.innerHTML = '';
+
+            users.forEach(user => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `<strong>Wallet Address:</strong> ${user.address}<br><strong>Privilege:</strong> ${user.privilege}`;
+                userListContainer.appendChild(listItem);
+            });
+        } catch (error) {
+            alert('Error fetching user list');
+        }
+    }
+    
+    document.getElementById('openSidebarBtn').addEventListener('click', () => {
+        loadUsers();
+        document.getElementById('sidebar').classList.add('open');
+    });
+    
+    // Close sidebar function
+    document.getElementById('closeSidebar').addEventListener('click', () => {
+        document.getElementById('sidebar').classList.remove('open');
     });
 
     async function loadLoanRequest() {

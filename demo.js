@@ -422,6 +422,10 @@ app.post("/reject-loan/:borrower", authenticateToken, async (req, res) => {
 app.post("/user/:borrower/payLoan", authenticateToken, async (req, res) => {
     const { borrower } = req.params;
     let amount = await User.findOne({address: borrower})
+    if (amount.loanAmount === "") return res.json({
+        status: false,
+        fullMessage: `No Loan Record Found`
+    }).status(400);
     let final_amount = amount.loanAmount/2 + ((amount.loanAmount*10)/(2*100))
     try {
         let result = await dbc.doLoanRepayment(borrower, final_amount);
@@ -441,6 +445,25 @@ app.post("/user/:borrower/payLoan", authenticateToken, async (req, res) => {
             status:false,
             fullMessage: `Failed to Pay Loan Installment`
         }).status(400);
+    }
+});
+
+app.get("/getUsers", authenticateToken, async (req, res) => {
+    try{
+        let users = await User.find({}, {address: 1, privilege: 1});
+        if (Object.keys(users).length === 0) {
+            return res.json({
+                status: false,
+                fullMessage: `Users not found`
+            }).status(400);
+        }
+        res.json(users).status(200);
+    } catch (err){
+        console.log(err)
+        return res.json({
+            status: false,
+            fullMessage: `Error getting user information`
+        }).status(500);
     }
 });
 
